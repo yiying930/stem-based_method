@@ -55,3 +55,8 @@ stem_MSE (stem_results$MSE)
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/MSE_tradeoff.png)
 
 ## Technical Description
+
+
+
+## Additional Notes
+![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_photo.png)
