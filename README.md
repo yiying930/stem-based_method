@@ -13,7 +13,7 @@ This repository contains the following:
 
 ## Description
 The major advantage of stem-based method over other methods is its robustness under various publication selection processes.
-Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by Hedges (1992) assumes that any statistically insignificant results are uniformly less likely to be published than significant results. The trim-and-fill method proposed by Duval and Tweedie (2000) assumes that results with extremely negative results will be unpublished. Yet the model of communication among researchers with aggregation frictions ([Furukawa 2019]((https://economics.mit.edu/files/12424))) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
+Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by Hedges (1992) assumes that any statistically insignificant results are uniformly less likely to be published than significant results. The trim-and-fill method proposed by Duval and Tweedie (2000) assumes that results with extremely negative results will be unpublished. Yet the model of communication among researchers with aggregation frictions ([Furukawa 2019](https://economics.mit.edu/files/12424)) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
 
 ![Figure 1](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_vertical0.png)
 > This figure illustrates the three publication selection processes discussed above in funnel plots. 
@@ -24,10 +24,11 @@ in the shaded regions.
 What could meta-analysts do to provide a meta-analysis estimate that builds a consensus among contradictory findings, when the bias correction methods themselves mutually contradict with one another?
 
 
-The stem-based method focuses on **n** most precise studies to provide a meta-analysis estimates because the models commonly suggest that the precise studies suffer less from publication selection. Heuristically, more precise studies are more reliable so that there is less reason not to publish the studies. Graphically, the following figure depicts the mean of coefficients conditional on precision levels across publication selection processes discussed above, showing that the precise studies have less publication bias.
+The stem-based method focuses on **n** most precise studies to provide a meta-analysis estimates because the models commonly suggest that the precise studies suffer less from publication selection. Heuristically, more precise studies are more reliable so that there is less reason not to publish the studies. Graphically, the following figure shows that the precise studies have less publication bias by depicting the mean of coefficients conditional on precision levels across publication selection processes discussed above.
 
 
 ![Figure 2](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_vertical1.png)
+> The orange lines in the funnel plots describe the mean of coefficients at each precision levels.
 
 **Estimation:** the stem-based method chooses the optimal **n** most precise studies to include by minimizing the Mean Squared Error (MSE) of the estimates. <p align="center">
   <a href="https://www.codecogs.com/eqnedit.php?latex=\min_{n}&space;MSE(n)&space;=&space;Bias^2(n)&space;&plus;&space;Var(n)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\min_{n}&space;MSE(n)&space;=&space;Bias^2(n)&space;&plus;&space;Var(n)" title="\min_{n} MSE(n) = Bias^2(n) + Var(n)" /></a>
@@ -66,15 +67,17 @@ To visualize the stem-based method in a funnel plot, run:
 stem_funnel (eg_data, stem_results$estimates)
 ```
 ![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_funnel.png)
-The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
+> The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
 
-The user can adjust the scale of the precision measures and the legend flexibly by directly altering the R code.
+An appropriate scale of the precision measures will depend on the distribution of standard errors in the data set. An appropriate position of the legend will also depend on the distribution of estimates. It is possible to modify them in the `R` code.
 
-
+To visualize the bias-variance trade-off to minimize the Mean Squared Error (MSE), run:
 ```
 stem_MSE (stem_results$MSE)
 ```
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/MSE_tradeoff.png)
+> Bias^2 - b_0^2 describes the relevant component of bias squared term. Variance is the total variance, and MSE - b_0^2 describes the relevant component of MSE.
+This figure illustrates how the stem-based method chooses the optimal number of studies to include by minimizing the relevant component of MSE. As the theory suggests, as more studies are included in the sample, bias squared increases whereas variance decreases. Consequently, it is optimal to include some intermediate number of studies (here, n=17) for estimation.
 
 ## Technical Description
 
