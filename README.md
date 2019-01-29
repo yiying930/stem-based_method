@@ -82,11 +82,10 @@ This figure illustrates how the stem-based method chooses the optimal number of 
 
 ## Technical Description
 
-- `param`
-  The estimation of standard deviation (sd) of underlying true effect involves an iterative computation until convergence. The default tolerance level is set to be 10^(-4) for one step of adjustment, and the default maximum number of iteration is set to be 10^3. It is possible to modify them in the `R` code.
-- minimum number of studies = 3
+- **`param`:** The estimation of standard deviation (sd) of underlying true effect involves an iterative computation until convergence. The default tolerance level is set to be 10^(-4) for one step of adjustment, and the default maximum number of iteration is set to be 10^3. It is possible to modify them in the `R` code.
+- **minimum number of studies = 3:**
   The dataset must contain at least 3 studies for the estimation to give any estimates. This is because computation of MSE uses (i) most precise study to be used as a testing set in the Cross Validation process, and (ii) studies other than the most precise study must contain more than two studies to produce unbiased estimate of b_0^2.
-### a caveat
+- **a caveat:**
 The assumption of this method is that the most precise study reasonably approximates the true mean on average. To ensure that the most precise study is reliable, it is encouraged to pay extra attention to quality of the study with the smallest standard error.
 
 ## Additional Support
