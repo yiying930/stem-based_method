@@ -285,18 +285,16 @@ stem_MSE <- function(V){
   bias_squared = V[,3]
   variance = V[,2]
   N_study = dim(V)[1]
-  View(N_study)
   
   #figure input
   N_min = 2
   lineset <- 2.5
-  num_study <- N_min+1:N_study+1
-  View(num_study)
+  num_study <- (N_min+1):(N_study+1)
   
   layout(matrix(c(1,2,3,3), 2, 2, byrow = TRUE))
   plot(num_study,bias_squared[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main= expression(Bias^2 - b[0]^2))
-  plot(num_study,variance[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = 'Variance')
-  plot(num_study,MSE[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = 'MSE')
+  plot(num_study,variance[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = expression(Variance))
+  plot(num_study,MSE[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = expression(MSE - b[0]^2))
 }
 
 #4. auxiliary function
