@@ -110,7 +110,7 @@ The name "stem-based" method is derived from how the most precise studies in met
 I thank Amy Kim for her Research Assistance to translate the `MATLAB` code to implement the stem-based method into the `R` code. I also thank Chris Doucouliagos for sharing and allowing me to post the example data.
 
 ## Contact
-Please feel free to contact [me](cfurukawa@mit.edu) to ask any related questions.
+Please feel free to contact me at cfurukawa@mit.edu to ask any related questions.
 
 ## References
 - hedges
