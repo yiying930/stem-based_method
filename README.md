@@ -77,17 +77,36 @@ stem_MSE (stem_results$MSE)
 ```
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/MSE_tradeoff.png)
 > Bias^2 - b_0^2 describes the relevant component of bias squared term. Variance is the total variance, and MSE - b_0^2 describes the relevant component of MSE.
+
 This figure illustrates how the stem-based method chooses the optimal number of studies to include by minimizing the relevant component of MSE. As the theory suggests, as more studies are included in the sample, bias squared increases whereas variance decreases. Consequently, it is optimal to include some intermediate number of studies (here, n=17) for estimation.
 
 ## Technical Description
 
+### `param`
+The estimation of standard deviation (sd) of underlying true effect involves an iterative computation until convergence. The default tolerance level is set to be 10^(-4) for one step of adjustment, and the default maximum number of iteration is set to be 10^3. It is possible to modify them in the `R` code.
+### minimum number of studies = 3
+The dataset must contain at least 3 studies for the estimation to give any estimates. This is because computation of MSE uses (i) most precise study to be used as a testing set in the Cross Validation process, and (ii) studies other than the most precise study must contain more than two studies to produce unbiased estimate of b_0^2.
+### a caveat
+The assumption of this method is that the most precise study reasonably approximates the true mean on average. To ensure that the most precise study is reliable, it is encouraged to pay extra attention to quality of the study with the smallest standard error.
 
+## Additional Support
+The code also contains a function `data_median()` that selects the study with median coefficient (or computationally closest to median when there are even number of studies) when each study contains multiple estimates. This occurs often in economics meta-analysis data set, including the labor union data set used in the empirical test in [Section 3.3](https://economics.mit.edu/files/12424). Choosing the estimate with median magnitude is one way to produce a meta-analysis estimate, as done in Havranek (2015).
 
-## Additional Notes
+The function `data_median(data, "x1", "x2", "x3")` takes an argument of the `data` with multiple estimates within the study ID `"x1"`, and coefficient `"x2"` and standard error `"x3"`. For example, in the labor union data contained in the [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, run:
+
+```
+original_data <- read.csv("laborunion_data.csv")
+median_data <- data_median(original_data, "studyno", "partialr", "se")
+stem_results <- stem(median_data$coefficient, median_data$standard_error, param)
+```
+## Final Remark
+The name "stem-based" method is derived from how the most precise studies in meta-analyses corresponds to the "stem" of the "funnel" plot!
+
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_photo.png)
 
-```
-excess_micro <- read.csv("C:/Chishio/02_Research/01_Active/01_Publication Bias/01_Input/03_numerical/04_data/02_additional data/excess_micro.csv")
-excess_median <- data_median(excess_micro, "idstudy", "excess", "se")
-output <- stem(excess_median$coefficient, excess_median$standard_error, stem_param)
-```
+
+## Acknowledgement
+I thank Amy Kim for her Research Assistance to translate the `MATLAB` code to implement the stem-based method into the `R` code. I also thank Chris Doucouliagos for sharing and allowing me to post the example data.
+
+## Contact
+Please feel free to contact [me](cfurukawa@mit.edu) to ask any related questions.
