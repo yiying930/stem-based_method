@@ -82,10 +82,10 @@ This figure illustrates how the stem-based method chooses the optimal number of 
 
 ## Technical Description
 
-### `param`
-The estimation of standard deviation (sd) of underlying true effect involves an iterative computation until convergence. The default tolerance level is set to be 10^(-4) for one step of adjustment, and the default maximum number of iteration is set to be 10^3. It is possible to modify them in the `R` code.
-### minimum number of studies = 3
-The dataset must contain at least 3 studies for the estimation to give any estimates. This is because computation of MSE uses (i) most precise study to be used as a testing set in the Cross Validation process, and (ii) studies other than the most precise study must contain more than two studies to produce unbiased estimate of b_0^2.
+- `param`
+  The estimation of standard deviation (sd) of underlying true effect involves an iterative computation until convergence. The default tolerance level is set to be 10^(-4) for one step of adjustment, and the default maximum number of iteration is set to be 10^3. It is possible to modify them in the `R` code.
+- minimum number of studies = 3
+  The dataset must contain at least 3 studies for the estimation to give any estimates. This is because computation of MSE uses (i) most precise study to be used as a testing set in the Cross Validation process, and (ii) studies other than the most precise study must contain more than two studies to produce unbiased estimate of b_0^2.
 ### a caveat
 The assumption of this method is that the most precise study reasonably approximates the true mean on average. To ensure that the most precise study is reliable, it is encouraged to pay extra attention to quality of the study with the smallest standard error.
 
@@ -102,11 +102,19 @@ stem_results <- stem(median_data$coefficient, median_data$standard_error, param)
 ## Final Remark
 The name "stem-based" method is derived from how the most precise studies in meta-analyses corresponds to the "stem" of the "funnel" plot!
 
-![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_photo.png)
-
+<p align="center"> 
+<img src="https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_photo.png">
+</p>
 
 ## Acknowledgement
 I thank Amy Kim for her Research Assistance to translate the `MATLAB` code to implement the stem-based method into the `R` code. I also thank Chris Doucouliagos for sharing and allowing me to post the example data.
 
 ## Contact
 Please feel free to contact [me](cfurukawa@mit.edu) to ask any related questions.
+
+## References
+- hedges
+- havranek
+- doucouliagos
+- duval and tweedie
+- furukawa
