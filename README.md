@@ -35,17 +35,22 @@ On the one hand, as n increases, the bias squared increases since estimates with
 ## Installation
 Open `R` or `RStudio` and download the code from [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository and save in your working directory. Install stem-based method by running the command:
 ```
-read(stem)
+source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method, along with `simulated_data` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository.
+The following example illustrates the use of stem-based method, along with `simulated_data` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. To read the data, run
 ```
-stem_results = stem (simulated_data$coefficient, simulated_data$standard_error)
+eg_data = stem (read.csv(".../simulated_data.csv"))
+```
+where `...` is the path to the folder.
+
+```
+stem_results = stem (eg_data$coefficient, eg_data$standard_error)
 ```
 
 ```
-stem_funnel (simulated_data, stem_results$estimates)
+stem_funnel (eg_data, stem_results$estimates)
 ```
 ![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_funnel.png)
 
@@ -55,3 +60,14 @@ stem_MSE (stem_results$MSE)
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/MSE_tradeoff.png)
 
 ## Technical Description
+
+
+
+## Additional Notes
+![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_photo.png)
+
+```
+excess_micro <- read.csv("C:/Chishio/02_Research/01_Active/01_Publication Bias/01_Input/03_numerical/04_data/02_additional data/excess_micro.csv")
+excess_median <- data_median(excess_micro, "idstudy", "excess", "se")
+output <- stem(excess_median$coefficient, excess_median$standard_error, stem_param)
+```
