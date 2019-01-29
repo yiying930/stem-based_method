@@ -6,17 +6,22 @@ Stem-based method provides a meta-analysis estimate that is robust under various
 
 This repository contains the following:
 * code and data
-  * stem
-  * sample_data
+  * stem_method
+  * simulated_data
+  * laborunion_data
 * figures
 
 ## Description
 The major advantage of stem-based method over other methods is its robustness under various publication selection processes.
-Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by Hedges (1992) assumes that any statistically insignificant results are uniformly less likely to be published than significant results. The trim-and-fill method proposed by Duval and Tweedie (2000) assumes that results with extremely negative results will be unpublished. Yet the model of communication among researchers with aggregation frictions (Furukawa 2019) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
+Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by Hedges (1992) assumes that any statistically insignificant results are uniformly less likely to be published than significant results. The trim-and-fill method proposed by Duval and Tweedie (2000) assumes that results with extremely negative results will be unpublished. Yet the model of communication among researchers with aggregation frictions ([Furukawa 2019]((https://economics.mit.edu/files/12424))) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
 
 ![Figure 1](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_vertical0.png)
+> This figure illustrates the three publication selection processes discussed above in funnel plots. 
+The x-axis is the study estimate, and the y-axis is the study precision (negative of standard errors). 
+Each dot represents one study's main estimate. Each model suggests that the omission occurs 
+in the shaded regions.
 
-What could meta-analysts do to provide a meta-analysis estimate that builds consensus among contradictory findings, when the bias correction methods themselves mutually contradict with one another?
+What could meta-analysts do to provide a meta-analysis estimate that builds a consensus among contradictory findings, when the bias correction methods themselves mutually contradict with one another?
 
 
 The stem-based method focuses on **n** most precise studies to provide a meta-analysis estimates because the models commonly suggest that the precise studies suffer less from publication selection. Heuristically, more precise studies are more reliable so that there is less reason not to publish the studies. Graphically, the following figure depicts the mean of coefficients conditional on precision levels across publication selection processes discussed above, showing that the precise studies have less publication bias.
@@ -39,20 +44,32 @@ source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method, along with `simulated_data` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. To read the data, run
+The following example illustrates the use of stem-based method with `simulated_data` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. This data is simulated for an illustrative purpose, as described in [Section 4.3.1](https://economics.mit.edu/files/12424), and generated under the assumption that the selection is based on p-values. To read the data, run:
 ```
-eg_data = stem (read.csv(".../simulated_data.csv"))
+eg_data = read.csv("simulated_data.csv")
 ```
-where `...` is the path to the folder.
+To run the stem-based method on this data, type:
+```
+stem_results = stem (eg_data$coefficient, eg_data$standard_error, param)
+```
+Here, `param` corresponds to some parameters used in estimation, as discussed in Technical Description below. The output wil be:
+```
+View(stem_results$estimates)
 
+      estimate         se sd of total heterogeneity n_stem n_iteration multiple % info used
+[1,] 0.4222988 0.07565684                 0.2638446     17           2        0   0.4426252
 ```
-stem_results = stem (eg_data$coefficient, eg_data$standard_error)
-```
+In this example, the mean of true effect is estimated to be 0.42 with standard error .075. The standard deviation of distribution of true effect is estimated to be 0.26, as the model assumes "random effects" model. The estimation of the mean has used the most precise 17 studies. The computation has taken 2 iterations in the outer algorithm to compute the standard deviation of distribution of true effect, and this process did not have "multiplicity" problem discussed in [Section 4.2.1.II](https://economics.mit.edu/files/12424). Only as a reference, this estimation of the mean has used "44% of the total information" contained in the data.
 
+To visualize the stem-based method in a funnel plot, run:
 ```
 stem_funnel (eg_data, stem_results$estimates)
 ```
 ![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_funnel.png)
+The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
+
+The user can adjust the scale of the precision measures and the legend flexibly by directly altering the R code.
+
 
 ```
 stem_MSE (stem_results$MSE)
