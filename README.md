@@ -64,7 +64,7 @@ In this example, the mean of true effect is estimated to be 0.42 with standard e
 
 To visualize the stem-based method in a funnel plot, run:
 ```
-stem_funnel (eg_data, stem_results$estimates)
+stem_funnel (eg_data$coefficient, eg_data$standard_error, stem_results$estimates)
 ```
 ![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_funnel.png)
 > The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
