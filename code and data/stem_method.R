@@ -132,8 +132,8 @@ stem_compute <- function(beta, se, sigma0){
   
   # minimize MSE
   n_stem_min = 3
-  MSE = Var_all[n_stem_min:N_study] + Bias[n_stem_min-1:N_study-1]
-  index <- which.min(MSE[n_stem_min:N_study])
+  MSE = Var_all[n_stem_min:N_study] + Bias[(n_stem_min-1):(N_study-1)]
+  index <- which.min(MSE)
   n_stem = index+(n_stem_min-1)
   
   # assign values
@@ -144,7 +144,7 @@ stem_compute <- function(beta, se, sigma0){
   
   # stack outputs
   Y = cbind(beta_stem,se_stem,sigma_stem,n_stem)
-  Z = rbind(MSE, Var_all[2:N_study], Bias)
+  Z = rbind(MSE, Var_all[n_stem_min:N_study], Bias[(n_stem_min-1):(N_study-1)])
   output <- list("estimates" = Y, "MSE" = Z)
   return(output)
 }
