@@ -45,7 +45,7 @@ source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method with `simulated_data` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. This data is simulated for an illustrative purpose, as described in [Section 4.3.1](https://economics.mit.edu/files/12424), and generated under the assumption that the selection is based on p-values. To read the data, run:
+The following example illustrates the use of stem-based method with `simulated_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. This data is simulated for an illustrative purpose, as described in [Section 4.3.1](https://economics.mit.edu/files/12424), and generated under the assumption that the selection is based on p-values. To read the data, run:
 ```
 eg_data = read.csv("simulated_data.csv")
 ```
