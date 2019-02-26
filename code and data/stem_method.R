@@ -205,7 +205,6 @@ weighted_mean_squared <- function(beta, se, sigma){
 }
 
 ##3. figures
-##3. figures
 install.packages("ggplot2")
 library(ggplot2)
 
@@ -298,6 +297,8 @@ stem_MSE <- function(V){
 }
 
 #4. auxiliary function
+install.packages("data.table")
+library("data.table")
 
 data_median <- function(data, id_var, main_var, additional_var){
   
