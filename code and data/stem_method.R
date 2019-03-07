@@ -228,6 +228,7 @@ stem_funnel <- function(beta_input, se_input, stem_estimates){
   cumulative_estimates = weighted_mean(beta_sorted, se_sorted, sigma0)
   
   #set values for figures
+  t_stat <- 1.96
   lineswidth<-2.5
   filled_diamond <- 18
   points_size <-2
