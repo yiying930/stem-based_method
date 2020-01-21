@@ -71,14 +71,15 @@ stem_funnel (eg_data$coefficient, eg_data$standard_error, stem_results$estimates
 
 An appropriate scale of the precision measures will depend on the distribution of standard errors in the data set. An appropriate position of the legend will also depend on the distribution of estimates. It is possible to modify them in the `R` code by changing resppective specifications.
 
+<!---
 To visualize the bias-variance trade-off to minimize the Mean Squared Error (MSE), run:
 ```
 stem_MSE (stem_results$MSE)
 ```
 ![Figure 4](https://github.com/Chishio318/stem-based_method/blob/master/figures/MSE_tradeoff.png)
 > Bias^2 - b_0^2 describes the relevant component of bias squared term in the MSE formula above. Variance is the total variance, and MSE - b_0^2 describes the relevant component of MSE.
-
 This figure illustrates how the stem-based method chooses the optimal number of studies to include by minimizing the relevant component of MSE. As the theory suggests, as more studies are included in the sample, bias squared increases whereas variance decreases. Consequently, it is optimal to include some intermediate number of studies (here, n=17) for meta-analysis estimation.
+--->
 
 ## Technical Description
 
