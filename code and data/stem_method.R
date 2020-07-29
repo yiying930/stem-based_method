@@ -124,7 +124,7 @@ stem_compute <- function(beta, se, sigma0){
   Eb_all = weighted_mean(beta, se, sigma0)
   Eb_leave_top_out = weighted_mean(beta[2:N_study], se[2:N_study], sigma0)
   Eb_squared = weighted_mean_squared(beta[2:N_study], se[2:N_study], sigma0)
-  Bias = Eb_squared - 2*beta[1]*Eb_leave_top_out #note that Bias[1] is not a valid measure
+  MSE_original = Eb_squared - 2*beta[1]*Eb_leave_top_out
   # since Eb_squared[1] cannot be computed without bias
   
   # variance
@@ -132,7 +132,8 @@ stem_compute <- function(beta, se, sigma0){
   
   # minimize MSE
   n_stem_min = 3
-  MSE = Var_all[n_stem_min:N_study] + Bias[(n_stem_min-1):(N_study-1)]
+  MSE = MSE_original[(n_stem_min-1):(N_study-1)]
+  Bias = MSE - Var_all[n_stem_min:N_study]
   index <- which.min(MSE)
   n_stem = index+(n_stem_min-1)
   
@@ -209,7 +210,7 @@ install.packages("ggplot2")
 library(ggplot2)
 
 se_rescale <- function(se){
-  Y <- -log(se)
+  Y <- -log10(se)
   return(Y)
 }
 
@@ -233,8 +234,8 @@ stem_funnel <- function(beta_input, se_input, stem_estimates){
   filled_diamond <- 18
   points_size <-2
   se_axis_min <- 0
-  beta_axis_min <- -1.4
-  beta_axis_max <- 2.2
+  beta_axis_min <- 0.6
+  beta_axis_max <- 1.2
   labNames <- c('Coefficient ','Precision ')
   
   # rescale SE for ease of visual interpretation
@@ -295,7 +296,10 @@ stem_MSE <- function(V){
   plot(num_study,bias_squared[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main= expression(Bias^2 - b[0]^2))
   plot(num_study,variance[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = expression(Variance))
   plot(num_study,MSE[N_min:N_study],type='l',  col="blue", lwd = lineset, xlab = 'Num of included studies i', ylab='', main = expression(MSE - b[0]^2))
-}
+  
+  }
+
+
 
 #4. auxiliary function
 install.packages("data.table")
