@@ -107,7 +107,7 @@ The name "stem-based" method is derived from how the most precise studies in met
 </p>
 
 ## Acknowledgement
-I thank Amy Kim for her Research Assistance to translate the `MATLAB` code to implement the stem-based method into the `R` code. I also thank Chris Doucouliagos for sharing and allowing me to post the example data. I thank Anna Mikusheva and Tom Havranek for their advice, and Taisuke Imai for his advice to improve the Figure.
+I thank Amy Kim and Yilin Tan for their Research Assistance. I also thank Chris Doucouliagos and Taisuke Imai for sharing and allowing me to post the example data. I thank Anna Mikusheva and Tom Havranek for their advice, and Taisuke Imai for his advice to improve the Figure.
 
 ## Contact
 Please feel free to contact me at furukawa-chishio-gj@ynu.ac.jp to ask any related questions.
@@ -117,4 +117,5 @@ Please feel free to contact me at furukawa-chishio-gj@ynu.ac.jp to ask any relat
 - Furukawa, Chishio. 2019. "Publication Bias under Aggregation Frictions: Theory, Evidence, and a New Correction Method" MIT Working Paper.
 - Havránek, Tomáš. 2015. “Measuring Intertemporal Substitution: The Importance of Method Choices and Selective Reporting.” Journal of the European Economic Association 13 (6): 1180–1204.
 - Hedges, Larry V. 1992. “Modeling Publication Selection Effects in Meta-Analysis.” Statistical Science, 246–255. 
+- Imai, Taisuke, Tom Rutter, and Colin Camerer. 2020. "Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets." The Economic Journal
 - Stanley, T. D., Stephen B. Jarrell, and Hristos Doucouliagos. 2010. “Could It Be Better to Discard 90% of the Data? A Statistical Paradox.” The American Statistician 64 (1): 70–77. 
