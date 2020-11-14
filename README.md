@@ -45,9 +45,9 @@ source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method with `simulated_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository. This data is simulated for an illustrative purpose, as described in [Section 4.3.1](https://economics.mit.edu/files/12424), and generated under the assumption that the selection is based on p-values. To read the data, run:
+The following example illustrates the use of stem-based method with `presentbias_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, adopted from the actual usage in Taisuke Imai, Tom Rutter, and Colin Camerer (2020) ["Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets"](https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaa115/5912830) in the Economic Journal.  To read the data, run:
 ```
-eg_data = read.csv("simulated_data.csv")
+eg_data = read.csv("presentbias_data.csv")
 ```
 To run the stem-based method on this data, type:
 ```
@@ -66,7 +66,7 @@ To visualize the stem-based method in a funnel plot, run:
 ```
 stem_funnel (eg_data$coefficient, eg_data$standard_error, stem_results$estimates)
 ```
-![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_funnel.png)
+![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_presentbias.png)
 > The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
 
 An appropriate scale of the precision measures will depend on the distribution of standard errors in the data set. An appropriate position of the legend will also depend on the distribution of estimates. It is possible to modify them in the `R` code by changing resppective specifications.
