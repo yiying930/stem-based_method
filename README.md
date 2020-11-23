@@ -7,13 +7,13 @@ Stem-based method provides a meta-analysis estimate that alleviates publication 
 This repository contains the following:
 * code and data
   * stem_method.R
-  * simulated_data.csv
+  * presentbias_data.csv
   * laborunion_data.csv
 * figures
 
 ## Description
 The major advantage of stem-based method over other most popular methods is its robustness under various publication selection processes.
-Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by [Hedges (1992)](https://www.jstor.org/stable/2246311?seq=1#metadata_info_tab_contents) assumes that publication probability will depend on statistical significance. The trim-and-fill method proposed by [Duval and Tweedie (2000)](https://www.ncbi.nlm.nih.gov/pubmed/10877304) assumes that results with extremely negative results will be unpublished. Yet a game-theoretic model of communication among researchers with aggregation frictions ([Furukawa 2019](https://economics.mit.edu/files/12424)) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
+Most commonly used bias correction methods make specific assumptions on the publication selection processes. The maximum-likelihood estimation method first proposed by [Hedges (1992)](https://www.jstor.org/stable/2246311?seq=1#metadata_info_tab_contents) and [Andrews and Kasy (2019)](https://www.aeaweb.org/articles?id=10.1257/aer.20180310) assumes that publication probability will depend on statistical significance. The trim-and-fill method proposed by [Duval and Tweedie (2000)](https://www.ncbi.nlm.nih.gov/pubmed/10877304) assumes that results with extremely negative results will be unpublished. Yet a game-theoretic model of communication among researchers with aggregation frictions ([Furukawa 2019](https://economics.mit.edu/files/12424)) suggests that imprecise null results are unlikely to be published so that publication selection process will depend on both p-values and estimates in a non-parsimonious way.
 
 ![Figure 1](https://github.com/Chishio318/stem-based_method/blob/master/figures/funnel_vertical0.png)
 > This figure illustrates the three publication selection processes discussed above in funnel plots. 
@@ -45,7 +45,7 @@ source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method with `presentbias_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, adopted from the actual usage in Taisuke Imai, Tom Rutter, and Colin Camerer (2020) ["Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets"](https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaa115/5912830) in the Economic Journal.  To read the data, run:
+The following example illustrates the use of stem-based method with `presentbias_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, adopted from the actual data in Taisuke Imai, Tom Rutter, and Colin Camerer (2020) ["Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets"](https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaa115/5912830) in the Economic Journal.  To read the data, run:
 ```
 eg_data = read.csv("presentbias_data.csv")
 ```
