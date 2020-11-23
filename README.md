@@ -45,26 +45,26 @@ source("stem_method.R")
 ```
 
 ## Example
-The following example illustrates the use of stem-based method with `presentbias_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, adopted from the actual data in Taisuke Imai, Tom Rutter, and Colin Camerer (2020) ["Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets"](https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaa115/5912830) in the Economic Journal.  To read the data, run:
+The following example illustrates the use of stem-based method with `presentbias_data.csv` in [code and data](https://github.com/Chishio318/stem-based_method/tree/master/code%20and%20data) repository, adopted from the actual data in Taisuke Imai, Tom Rutter, and Colin Camerer (2020) ["Meta-Analysis of Present-Bias Estimation Using Convex Time Budgets"](https://academic.oup.com/ej/advance-article/doi/10.1093/ej/ueaa115/5912830) in the Economic Journal. Their data and code are available [here](https://osf.io/wg87v/). To read the data, run:
 ```
 eg_data = read.csv("presentbias_data.csv")
 ```
 To run the stem-based method on this data, type:
 ```
-stem_results = stem (eg_data$coefficient, eg_data$standard_error, param)
+stem_results <- stem(eg_data$res.est.pbias, eg_data$res.err.pbias, param)
 ```
 Here, `param` corresponds to some parameters used in estimation, as discussed in Technical Description below. The output wil be:
 ```
 View(stem_results$estimates)
 
-      estimate         se sd of total heterogeneity n_stem n_iteration multiple % info used
-[1,] 0.4222988 0.07565684                 0.2638446     17           2        0   0.4426252
+      estimate          se sd of total heterogeneity n_stem n_iteration multiple % info used
+[1,] 0.9909784 0.002938965                0.02052263     56           3        0   0.4312265
 ```
-In this example, the mean of true effect is estimated to be 0.42 with standard error .075. The standard deviation of distribution of true effect is estimated to be 0.26, as the model assumes "random effects" model. (so far the code only has random effects option.) The estimation of the mean has used the most precise 17 studies. The computation has taken 2 iterations in the outer algorithm to compute the standard deviation of distribution of true effect, and this process did not have "multiplicity" discussed in [Section 4.2.1.II](https://economics.mit.edu/files/12424). As a reference, this estimation of the mean has used "44% of the total information" contained in the data.
+In this example, the mean of true present bias parameter is estimated to be 0.99 with standard error .0029. The standard deviation of distribution of true effect is estimated to be 0.02, as the model assumes "random effects" model. (so far the code only has random effects option.) The estimation of the mean has used the most precise 56 estimates. The computation has taken 3 iterations in the outer algorithm to compute the standard deviation of distribution of true effect, and this process did not have "multiplicity" discussed in [Section 4.2.1.II](https://economics.mit.edu/files/12424). As a reference, this estimation of the mean has used "43% of the total information" contained in the data.
 
 To visualize the stem-based method in a funnel plot, run:
 ```
-stem_funnel (eg_data$coefficient, eg_data$standard_error, stem_results$estimates)
+stem_funnel (eg_data$res.est.pbias, eg_data$res.err.pbias, stem_results$estimates)
 ```
 ![Figure 3](https://github.com/Chishio318/stem-based_method/blob/master/figures/stem_presentbias.png)
 > The orange diamond is the stem-based bias corrected estimate of mean of true effects, with the line indicating the 95 confidence interval (the estimate is statistically significant at conventional level). The connected gray line illustrates how inclusion of less precise studies change the estimate, describing how more studies lead to larger bias. The diamond in the middle indicates the minimum precision level that all included studies satisfy.
