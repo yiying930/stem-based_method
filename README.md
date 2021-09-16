@@ -1,5 +1,3 @@
-hello
-
 # Stem-based method to correct publication bias
 This repository contains the `R` code to implement the [stem-based method](https://economics.mit.edu/files/12424) to correct publication bias in meta-analyses.
 
